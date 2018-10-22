@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         d.js
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @author       test.yu
 // @match        http*://*/*
 // @run-at       document-start
@@ -434,8 +434,9 @@
                     boxSizing: 'border-box'
                 });
 
-                document.body.style.height = document.documentElement.scrollHeight + 'px';
                 document.head.querySelectorAll('script').$.remove();
+                $(document.head).append(document.body.querySelectorAll('link'));
+                document.body.style.height = document.documentElement.scrollHeight + 'px';
 
                 return this;
             },
