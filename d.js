@@ -402,6 +402,12 @@
             value: function() {
                 if (this.length === 0) return;
 
+                $(document.head).append(document.body.querySelectorAll('link, style'))
+                    .querySelectorAll('script').remove();
+                $(document.body).attr({
+                    height: document.documentElement.scrollHeight + 'px'
+                });
+
                 var parents = this.parents();
 
                 this.forEach(function(elem) {
@@ -410,15 +416,13 @@
                         $elem.css({
                             padding: 0,
                             margin: '0 auto',
+                            display: 'block',
                             width: '100%',
                             maxWidth: '1024px',
                             position: 'static'
                         });
 
                         $elem.siblings().filter(function(elem) {
-                            if (elem.tagName.toUpperCase() === 'LINK') {
-                                return false;
-                            }
                             if (parents.indexOf(elem) > -1) {
                                 return false;
                             }
@@ -433,10 +437,6 @@
                     padding: '15px',
                     boxSizing: 'border-box'
                 });
-
-                document.head.querySelectorAll('script').$.remove();
-                $(document.head).append(document.body.querySelectorAll('link'));
-                document.body.style.height = document.documentElement.scrollHeight + 'px';
 
                 return this;
             },
