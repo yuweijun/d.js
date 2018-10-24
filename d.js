@@ -5,6 +5,7 @@
 // @author       test.yu
 // @match        http*://*/*
 // @run-at       document-start
+// @grant        none
 // ==/UserScript==
 
 (function() {
@@ -402,12 +403,6 @@
             value: function() {
                 if (this.length === 0) return;
 
-                $(document.head).append(document.body.querySelectorAll('link, style'))
-                    .querySelectorAll('script').remove();
-                $(document.body).attr({
-                    height: document.documentElement.scrollHeight + 'px'
-                });
-
                 var parents = this.parents();
 
                 this.forEach(function(elem) {
@@ -423,6 +418,9 @@
                         });
 
                         $elem.siblings().filter(function(elem) {
+                            if (elem.tagName.toUpperCase() === 'LINK') {
+                                return false;
+                            }
                             if (parents.indexOf(elem) > -1) {
                                 return false;
                             }
@@ -437,6 +435,10 @@
                     padding: '15px',
                     boxSizing: 'border-box'
                 });
+
+                document.head.querySelectorAll('script').$.remove();
+                $(document.head).append(document.body.querySelectorAll('link'));
+                document.body.style.height = document.documentElement.scrollHeight + 'px';
 
                 return this;
             },
@@ -469,3 +471,4 @@
     });
 
 })();
+
