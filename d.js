@@ -12,7 +12,7 @@
 
     var element = {
         siblings: function() {
-            return [...this.parentNode.children].filter(c => c.nodeType == 1 && c != this);
+            return Array.from(this.parentNode.children).filter(c => c.nodeType == 1 && c != this);
         },
         attr: function(attributes) {
             if (this.nodeType === 3 || this.nodeType === 8 || this.nodeType === 2) {
