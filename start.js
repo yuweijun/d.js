@@ -16,7 +16,7 @@
         var tampermonkey = document.head.querySelector('#tampermonkey-hide-body');
         if (tampermonkey) tampermonkey.remove();
     };
-    var timeId = setTimeout(fn, 3000);
+    var timeId = setTimeout(fn, 500);
 
     document.addEventListener('DOMContentLoaded', function(){
         clearTimeout(timeId);
