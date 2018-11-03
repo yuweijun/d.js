@@ -393,7 +393,6 @@
                 var parents = this.parents();
 
                 this.forEach(function(elem) {
-                    console.log(elem, elem.tagName);
                     while (elem && elem.tagName.toUpperCase() !== 'BODY') {
                         var $elem = $(elem);
                         $elem.css({
