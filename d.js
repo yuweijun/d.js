@@ -449,7 +449,7 @@
             }
 
             if (this.full()) {
-                stack.clear();
+                this.clear();
             }
 
             this.keys.push(k);
@@ -479,7 +479,7 @@
         }
 
         match(k, v) {
-            if (stack.full()) {
+            if (this.full()) {
                 return this.dump() === v;
             }
 
