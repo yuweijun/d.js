@@ -1,6 +1,20 @@
 (function() {
 
-    var stack = document.$.stack;
+    var stack = new document.$.Stack;
+
+    var parents = [];
+
+    document.addEventListener('dblclick', function(e) {
+        parents = document.$(e.target).parents().slice(0, -2);
+    });
+
+    var render = function() {
+        if (parents.length) {
+            document.$(parents.pop()).tee().readable();
+        } else {
+            document.$('article').tee().readable();
+        }
+    };
 
     document.addEventListener('keydown', function(e) {
         if (document.querySelectorAll('input:focus, textarea:focus, select:focus').length) return;
@@ -8,7 +22,7 @@
         stack.push(e.key);
 
         if (stack.match(e.key, 'dd')) {
-            document.$('article').tee().readable();
+            render();
         }
     });
 
