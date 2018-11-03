@@ -435,9 +435,13 @@
         return Object.create(array, attr);
     };
 
-    var stack = {
-        timeId: 0,
-        keys: [],
+    class Stack {
+
+        constructor() {
+            this.timeId = 0;
+            this.keys = [];
+        }
+
         push(k) {
             let code = k.charCodeAt(0);
             if (code < 97 || code > 122) {
@@ -459,17 +463,21 @@
             }, 300);
 
             return this;
-        },
+        }
+
         dump() {
             return this.keys.join('');
-        },
+        }
+
         clear() {
             this.keys.length = 0;
             return this;
-        },
+        }
+
         full() {
             return this.keys.length === 2;
-        },
+        }
+
         match(k, v) {
             if (stack.full()) {
                 return this.dump() === v;
@@ -477,7 +485,7 @@
 
             return false;
         }
-    };
+    }
 
     Object.defineProperty(Document.prototype, '$', {
         get() {
@@ -490,7 +498,7 @@
                     return $(arguments[0]);
                 }
             };
-            fn.stack = stack;
+            fn.Stack = Stack;
 
             return fn;
         },

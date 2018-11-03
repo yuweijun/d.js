@@ -1,6 +1,6 @@
 (function() {
 
-    var stack = document.$.stack;
+    var stack = new document.$.Stack;
 
     document.addEventListener('keydown', function(e) {
 
