@@ -1,20 +1,12 @@
 (function() {
-    'use strict';
-
-    function se(d) {
-        return d.selection ? d.selection.createRange().text : d.getSelection();
-    };
 
     document.addEventListener('keydown', function(e) {
         if (e.altKey) {
             e.preventDefault();
             if (e.which === 67) {
-                var s = se(document);
-                for (var i = 0; i < frames.length && !s; i++) {
-                    s = se(frames[i].document);
-                }
-                console.log("copy", s.toString());
-                GM_setClipboard(s.toString(), {type: 'text', mimetype: 'text/plain'});
+                var s = document.$.selection();
+                console.log("copy", s);
+                GM_setClipboard(s, {type: 'text', mimetype: 'text/plain'});
             } else if (e.which === 82) {
                 // console.log('reload window');
                 window.location.reload();
@@ -24,5 +16,6 @@
             }
         }
     });
+
 })();
 

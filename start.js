@@ -9,7 +9,7 @@
         var tampermonkey = document.head.querySelector('#tampermonkey-hide-body');
         if (tampermonkey) tampermonkey.remove();
     };
-    var timeId = setTimeout(fn, 800);
+    var timeId = setTimeout(fn, 1000);
 
     document.addEventListener('DOMContentLoaded', function(){
         clearTimeout(timeId);

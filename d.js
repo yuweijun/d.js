@@ -437,7 +437,8 @@
 
     class Stack {
 
-        constructor() {
+        constructor(size = 2) {
+            this.size = size;
             this.timeId = 0;
             this.keys = [];
         }
@@ -475,12 +476,19 @@
         }
 
         full() {
-            return this.keys.length === 2;
+            return this.keys.length === this.size;
         }
 
-        match(k, v) {
+        match(k, v, fn) {
             if (this.full()) {
-                return this.dump() === v;
+                let matched = this.dump() === v;
+                if (matched) {
+                    if (typeof fn === 'function') {
+                        fn();
+                    }
+                }
+
+                return matched;
             }
 
             return false;
@@ -500,6 +508,14 @@
             };
             fn.Stack = Stack;
 
+            fn.selection = function() {
+                let s = document.getSelection().toString();
+                for (let i = 0; i < frames.length && !s; i++) {
+                    s = frames[i].document.getSelection().toString();
+                }
+                return s.trim();
+            };
+
             return fn;
         },
         enumerable: false
@@ -513,4 +529,3 @@
     });
 
 })();
-
