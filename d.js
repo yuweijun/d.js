@@ -388,7 +388,7 @@
         };
         attr.readable = {
             value() {
-                if (this.length === 0) return;
+                if (this.length === 0) return this;
 
                 var parents = this.parents();
 
