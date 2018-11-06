@@ -516,6 +516,10 @@
                 return s.trim();
             };
 
+            fn.focused = function() {
+                return !!document.querySelectorAll('input:focus, textarea:focus, select:focus, [contentEditable=true]:focus').length;
+            };
+
             return fn;
         },
         enumerable: false

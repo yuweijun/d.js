@@ -4,7 +4,7 @@
 
     document.addEventListener('keydown', function(e) {
 
-        if (document.querySelectorAll('input:focus, textarea:focus, select:focus').length) return;
+        if (document.$.focused()) return;
 
         if (e.shiftKey) {
             var height = document.documentElement.scrollHeight;
