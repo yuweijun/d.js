@@ -511,7 +511,9 @@
             fn.selection = function() {
                 let s = document.getSelection().toString();
                 for (let i = 0; i < frames.length && !s; i++) {
-                    s = frames[i].document.getSelection().toString();
+                    try {
+                        s = frames[i].document.getSelection().toString();
+                    } catch (err) {}
                 }
                 return s.trim();
             };
