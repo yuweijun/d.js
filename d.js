@@ -507,13 +507,13 @@
 
     Object.defineProperty(Document.prototype, '$', {
         get() {
-            let fn = function() {
-                if (arguments.length === 0) {
+            let fn = function(...rest) {
+                if (rest.length === 0) {
                     return $(document);
-                } else if (typeof arguments[0] === 'string') {
-                    return $(document.querySelectorAll.apply(document, arguments));
+                } else if (typeof rest[0] === 'string') {
+                    return $(document.querySelectorAll.apply(document, rest));
                 } else {
-                    return $(arguments[0]);
+                    return $(rest[0]);
                 }
             };
             fn.Stack = Stack;
@@ -545,4 +545,3 @@
     });
 
 })();
-

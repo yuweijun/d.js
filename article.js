@@ -6,12 +6,19 @@
 
     var stack = new document.$.Stack(4, 1000);
 
-    var parents = [], target;
+    var parents = [],
+        target;
 
     document.addEventListener('dblclick', function(e) {
-        target = e.target;
-        document.$('.target-outline').removeClass('target-outline');
-        parents = document.$(target).addClass('target-outline').parents().slice(0, -2);
+        target = document.$(e.target);
+        parents = target.parents().slice(0, -2);
+
+        if (target.hasClass('target-outline')) {
+            target.removeClass('target-outline');
+        } else {
+            document.$('.target-outline').removeClass('target-outline');
+            target.addClass('target-outline');
+        }
     });
 
     var render = function() {
@@ -37,4 +44,3 @@
     });
 
 })();
-
