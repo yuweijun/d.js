@@ -47,15 +47,14 @@
         } else if (e.altKey) {
             // console.log("e.altKey", e.altKey);
         } else {
-            // console.log(e.key, e.which, stack.keys);
             // check combination key shortcuts firstly
-            stack.push(e.key);
-            if (stack.match(e.key, 'gg')) {
+            stack.push(e.which);
+            stack.match('gg', function() {
                 window.scroll({
                     top: 0
                 });
                 return;
-            }
+            });
 
             // check key shortcuts for J/K
             if (e.which === 74) {

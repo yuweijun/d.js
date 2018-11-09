@@ -21,27 +21,27 @@
     document.addEventListener('keydown', function(e) {
         if (document.$.focused()) return;
 
-        let k = e.key;
+        let k = e.which;
         stack.push(k);
 
-        stack.match(k, 'bb', outlined.next.bind(outlined));
+        stack.match('bb', outlined.next.bind(outlined));
 
-        stack.match(k, 'tt', function() {
+        stack.match('tt', function() {
             let s = document.$.selection();
             open('https://translate.google.com/#en/zh-CN/' + encode(s)).focus();
         });
 
-        stack.match(k, 'yt', function() {
+        stack.match('yt', function() {
             let s = document.$.selection();
             open('http://dict.youdao.com/w/' + encode(s)).focus();
         });
 
-        stack.match(k, 'dt', function() {
+        stack.match('dt', function() {
             let s = document.$.selection();
             open('http://dict.cn/' + encode(s)).focus();
         });
 
-        stack.match(k, 'ev', function() {
+        stack.match('ev', function() {
             open('https://app.yinxiang.com/Home.action').focus();
         });
 

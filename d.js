@@ -437,15 +437,23 @@
 
     class Stack {
 
-        constructor(size = 2) {
+        /**
+         * @size stack length
+         * @timeout stack will be clear after timeout
+         */
+        constructor(size = 2, timeout = 300) {
             this.size = size;
+            this.timeout = timeout;
             this.timeId = 0;
             this.keys = [];
         }
 
-        push(k) {
-            let code = k.charCodeAt(0);
-            if (code < 97 || code > 122) {
+        push(code = 0) {
+            if (code === 27) {
+                return this.clear();
+            }
+
+            if (code < 32 || code >= 127) {
                 return this;
             }
 
@@ -453,16 +461,14 @@
                 this.clear();
             }
 
+            let k = String.fromCharCode(code).toLowerCase();
             this.keys.push(k);
             if (this.timeId) {
                 clearTimeout(this.timeId);
                 this.timeId = 0;
             }
 
-            this.timeId = setTimeout(() => {
-                this.clear()
-            }, 300);
-
+            this.timeId = setTimeout(this.clear.bind(this), this.timeout);
             return this;
         }
 
@@ -479,16 +485,20 @@
             return this.keys.length === this.size;
         }
 
-        match(k, v, fn) {
-            if (this.full()) {
-                let matched = this.dump() === v;
-                if (matched) {
-                    if (typeof fn === 'function') {
-                        fn();
-                    }
-                }
+        match(v, fn) {
+            let matched = false;
+            if (typeof v === 'string') {
+                matched = this.dump() === v;
+            } else if (v instanceof RegExp) {
+                matched = v.test(this.dump());
+            }
 
-                return matched;
+            if (matched) {
+                if (typeof fn === 'function') {
+                    fn(this);
+                    this.clear();
+                }
+                return true;
             }
 
             return false;
@@ -535,3 +545,4 @@
     });
 
 })();
+
