@@ -19,6 +19,12 @@
     };
 
     document.addEventListener('keydown', function(e) {
+        if (e.which === 27) {
+            document.$('body *').css({outline: ''});
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
         if (document.$.focused()) return;
 
         let k = e.which;

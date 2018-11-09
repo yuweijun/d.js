@@ -20,7 +20,7 @@
                     top: 0
                 });
             } else if (e.which === 77) {
-                // console.log("M");
+                // console.log("m");
                 window.scroll({
                     top: height / 2
                 });
@@ -28,14 +28,14 @@
         } else if (e.ctrlKey) {
             var page = Math.floor(window.innerHeight / 50) * 50;
             if (e.which === 68) {
-                // console.log('D');
+                // console.log('d');
                 // default action is bookmark
                 e.preventDefault();
                 window.scrollBy({
                     top: page
                 });
             } else if (e.which === 85) {
-                // console.log('U');
+                // console.log('u');
                 // default action is source code
                 e.preventDefault();
                 window.scrollBy({
@@ -56,15 +56,17 @@
                 return;
             });
 
-            // check key shortcuts for J/K
-            if (e.which === 74) {
-                // console.log('J');
+            if (e.which === 27) {
+                // console.log('Escape');
+                stack.clear();
+            } else if (e.which === 74) {
+                // console.log('j');
                 // chrome default scroll 40px using arrow keys
                 window.scrollBy({
                     top: 50
                 });
             } else if (e.which === 75) {
-                // console.log('K');
+                // console.log('k');
                 window.scrollBy({
                     top: -50
                 });

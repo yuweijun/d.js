@@ -516,6 +516,7 @@
                     return $(rest[0]);
                 }
             };
+
             fn.Stack = Stack;
 
             fn.selection = function() {
@@ -529,17 +530,11 @@
             };
 
             fn.focused = function() {
-                return !!document.querySelectorAll('input:focus, textarea:focus, select:focus, [contentEditable=true]:focus').length;
+                let selectors = 'input:focus, textarea:focus, select:focus, [contentEditable=true]:focus';
+                return !!document.querySelectorAll(selectors).length;
             };
 
             return fn;
-        },
-        enumerable: false
-    });
-
-    Object.defineProperty(NodeList.prototype, '$', {
-        get() {
-            return $(this);
         },
         enumerable: false
     });

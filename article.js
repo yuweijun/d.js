@@ -1,7 +1,7 @@
 (function() {
 
     document.head.insertAdjacentHTML('beforeend', `<style id="tampermonkey-outline-style">
-        .target-outline { outline: 2px dashed rgba(128, 128, 128, .5); }
+        .target-outline { outline: 1px dashed rgba(128, 128, 128, .5); }
     </style>`);
 
     var stack = new document.$.Stack(4, 1000);
@@ -50,3 +50,4 @@
     });
 
 })();
+
