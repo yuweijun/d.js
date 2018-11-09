@@ -1,6 +1,6 @@
 (function() {
 
-    var stack = new document.$.Stack(3, 1000);
+    var stack = new document.$.Stack(4, 1000);
 
     var parents = [], target;
 
@@ -12,7 +12,7 @@
     var render = function() {
         let keys = stack.dump();
         if (parents.length) {
-            if (/^\ddd$/.test(keys)) {
+            if (/^\d+dd$/.test(keys)) {
                 let times = Number.parseInt(keys, 10) - 1;
                 for (let i = 0; i < times; i++) {
                     parents.pop();
@@ -28,7 +28,7 @@
         if (document.$.focused()) return;
 
         stack.push(e.which);
-        stack.match(/^\d?dd$/, render);
+        stack.match(/^\d*dd$/, render);
     });
 
 })();
