@@ -1,12 +1,17 @@
 (function() {
 
+    document.head.insertAdjacentHTML('beforeend', `<style id="tampermonkey-outline-style">
+        .target-outline { outline: 2px dashed rgba(128, 128, 128, .5); }
+    </style>`);
+
     var stack = new document.$.Stack(4, 1000);
 
     var parents = [], target;
 
     document.addEventListener('dblclick', function(e) {
         target = e.target;
-        parents = document.$(target).parents().slice(0, -2);
+        document.$('.target-outline').removeClass('target-outline');
+        parents = document.$(target).addClass('target-outline').parents().slice(0, -2);
     });
 
     var render = function() {
@@ -32,5 +37,4 @@
     });
 
 })();
-
 

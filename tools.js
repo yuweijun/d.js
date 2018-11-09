@@ -9,7 +9,7 @@
             });
             yield;
 
-            document.$("*").forEach(elem => (elem.style.outline = "0"));
+            document.$("*").css({outline: ''});
             yield;
         }
     })();
