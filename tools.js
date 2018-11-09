@@ -4,12 +4,12 @@
 
     var outlined = (function*() {
         while (true) {
-            document.$("*").forEach(function(elem) {
+            document.$("body *").forEach(function(elem) {
                 elem.style.outline = "1px solid #" + (~~(Math.random() * (1 << 24))).toString(16);
             });
             yield;
 
-            document.$("*").css({outline: ''});
+            document.$("body *").css({outline: ''});
             yield;
         }
     })();
