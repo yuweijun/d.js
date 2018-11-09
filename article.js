@@ -21,6 +21,12 @@
         }
     });
 
+    document.addEventListener('keydown', function(e) {
+        if (e.which === 27) {
+            document.$('.target-outline').removeClass('target-outline');
+        }
+    });
+
     var render = function() {
         let keys = stack.dump();
         if (parents.length) {
