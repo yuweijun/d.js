@@ -2,10 +2,11 @@
 
     var stack = new document.$.Stack(3, 1000);
 
-    var parents = [];
+    var parents = [], target;
 
     document.addEventListener('dblclick', function(e) {
-        parents = document.$(e.target).parents().slice(0, -2);
+        target = e.target;
+        parents = document.$(target).parents().slice(0, -2);
     });
 
     var render = function() {
@@ -17,7 +18,7 @@
                     parents.pop();
                 }
             }
-            document.$(parents.pop()).tee().readable();
+            document.$(parents.pop() || target).tee().readable();
         } else {
             document.$('article').tee().readable();
         }
