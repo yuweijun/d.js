@@ -48,7 +48,7 @@
 
         stack.push(e.which);
         stack.match(/^\d*dd$/, render);
-        stack.match('xx', target.removeClass('target-outline').remove.bind(target));
+        stack.match('xx', target.remove.bind(target));
     });
 
 })();
