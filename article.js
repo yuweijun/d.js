@@ -36,7 +36,7 @@
                     parents.pop();
                 }
             }
-            target.removeClass('target-outline');
+            target && target.removeClass('target-outline');
             document.$(parents.pop() || target).tee().readable();
         } else {
             document.$('article').tee().readable();
@@ -48,7 +48,9 @@
 
         stack.push(e.which);
         stack.match(/^\d*dd$/, render);
-        stack.match('xx', target.remove.bind(target));
+        stack.match('xx', function () {
+            target && target.remove();
+        });
     });
 
 })();
