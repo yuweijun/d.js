@@ -49,10 +49,9 @@
         stack.push(e.which);
         stack.match(/^\d*dd$/, render);
         stack.match('xx', function () {
+            window.getSelection().deleteFromDocument();
             if (target) {
                 target.remove();
-            } else {
-                window.getSelection().deleteFromDocument();
             }
         });
     });
