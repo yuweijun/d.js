@@ -23,6 +23,7 @@
 
     document.addEventListener('keydown', function(e) {
         if (e.which === 27) {
+            target = null;
             document.$('.target-outline').removeClass('target-outline');
         }
     });
@@ -36,7 +37,7 @@
                     parents.pop();
                 }
             }
-            target && target.removeClass('target-outline');
+            if (target) target.removeClass('target-outline');
             document.$(parents.pop() || target).tee().readable();
         } else {
             document.$('article').tee().readable();
