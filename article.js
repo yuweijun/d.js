@@ -1,7 +1,7 @@
 (function() {
 
     document.head.insertAdjacentHTML('beforeend', `<style id="tampermonkey-outline-style">
-        .target-outline { outline: 1px dashed rgba(128, 128, 128, .5); }
+        .target-outline { outline: 1px dashed rgba(128, 128, 128, .2); }
     </style>`);
 
     var stack = new document.$.Stack(4, 1000);
@@ -49,7 +49,11 @@
         stack.push(e.which);
         stack.match(/^\d*dd$/, render);
         stack.match('xx', function () {
-            target && target.remove();
+            if (target) {
+                target.remove();
+            } else {
+                window.getSelection().deleteFromDocument();
+            }
         });
     });
 
