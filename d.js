@@ -423,7 +423,7 @@
                     boxSizing: 'border-box'
                 });
 
-                document.head.$.('script')remove();
+                document.$('head script')remove();
                 $(document.head).append(document.body.querySelectorAll('link'));
                 document.body.style.height = document.documentElement.scrollHeight + 'px';
 
