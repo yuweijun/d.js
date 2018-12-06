@@ -9,11 +9,12 @@
         var tampermonkey = document.head.querySelector('#tampermonkey-hide-body');
         if (tampermonkey) tampermonkey.remove();
     };
-    var timeId = setTimeout(fn, 1000);
+    var timeId = setTimeout(fn, 50);
 
     document.addEventListener('DOMContentLoaded', function(){
         clearTimeout(timeId);
-        setTimeout(fn, 50);
+        setTimeout(fn, 0);
     }, false);
 
 })();
+
