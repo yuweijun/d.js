@@ -122,6 +122,8 @@
         prepend(nodes = []) {
             if (nodes instanceof Array) {
                 nodes.forEach(elem => this.insertBefore(elem, this.firstElementChild));
+            } else if (typeof nodes === 'string') {
+                this.insertAdjacentHTML('afterbegin', nodes);
             } else {
                 $(nodes).forEach(elem => this.insertBefore(elem, this.firstElementChild));
             }
@@ -131,6 +133,8 @@
         append(nodes = []) {
             if (nodes instanceof Array) {
                 nodes.forEach(elem => this.appendChild(elem));
+            } else if (typeof nodes === 'string') {
+                this.insertAdjacentHTML('beforeend', nodes);
             } else {
                 $(nodes).forEach(elem => this.appendChild(elem));
             }
