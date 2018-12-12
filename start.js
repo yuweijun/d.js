@@ -1,7 +1,7 @@
 (function() {
 
     document.head.insertAdjacentHTML('beforeend', `<style id="tampermonkey-hide-body">
-        body {visibility: hidden; overflow: hidden; background: black;}
+        body {visibility: hidden; overflow: hidden;}
         aside {display: none;}
     </style>`);
 
