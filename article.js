@@ -38,9 +38,9 @@
                 }
             }
             if (target) target.removeClass('target-outline');
-            document.$(parents.pop() || target).tee().readable();
+            NodeList.prototype.readable.apply.(document.$(parents.pop() || target));
         } else {
-            document.$('article').tee().readable();
+            document.querySelectorAll('article').readable();
         }
     };
 

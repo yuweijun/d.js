@@ -1,7 +1,7 @@
 (function() {
 
     document.head.insertAdjacentHTML('beforeend', `<style id="tampermonkey-hide-body">
-        body {visibility: hidden; overflow: hidden;}
+        body {visibility: hidden; overflow: hidden; background: black;}
         aside {display: none;}
     </style>`);
 
@@ -9,7 +9,7 @@
         var tampermonkey = document.head.querySelector('#tampermonkey-hide-body');
         if (tampermonkey) tampermonkey.remove();
     };
-    var timeId = setTimeout(fn, 50);
+    var timeId = setTimeout(fn, 800);
 
     document.addEventListener('DOMContentLoaded', function(){
         clearTimeout(timeId);
