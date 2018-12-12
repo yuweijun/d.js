@@ -38,7 +38,7 @@
                 }
             }
             if (target) target.removeClass('target-outline');
-            NodeList.prototype.readable.apply.(document.$(parents.pop() || target));
+            NodeList.prototype.readable.apply(document.$(parents.pop() || target));
         } else {
             document.querySelectorAll('article').readable();
         }
