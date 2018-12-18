@@ -1,13 +1,33 @@
 (function() {
 
     document.head.insertAdjacentHTML('beforeend', `<style id="tampermonkey-outline-style">
-        .target-outline { outline: 1px dashed rgba(202, 96, 133, .5); }
+        .target-outline { outline: 2px solid rgba(8, 8, 4, .4); }
     </style>`);
 
-    var stack = new document.$.Stack(4, 1000);
+    const stack = new document.$.Stack(4, 1000);
 
-    var parents = [],
+    let parents = [],
+        prevented = false,
         target;
+
+    let documentClick = function(e) {
+        e.preventDefault();
+        return false;
+    };
+
+    let prevendClick = function() {
+        if (!prevented) {
+            prevented = !prevented;
+            document.addEventListener('click', documentClick, true);
+        }
+    };
+
+    let restoreClick = function() {
+        if (prevented) {
+            prevented = !prevented;
+            document.removeEventListener('click', documentClick, true);
+        }
+    };
 
     document.addEventListener('dblclick', function(e) {
         target = document.$(e.target);
@@ -15,9 +35,11 @@
 
         if (target.hasClass('target-outline')) {
             target.removeClass('target-outline');
+            restoreClick();
         } else {
             document.$('.target-outline').removeClass('target-outline');
             target.addClass('target-outline');
+            prevendClick();
         }
     });
 
@@ -25,10 +47,11 @@
         if (e.which === 27) {
             target = null;
             document.$('.target-outline').removeClass('target-outline');
+            restoreClick();
         }
     });
 
-    var render = function() {
+    let render = function() {
         let keys = stack.dump();
         if (parents.length) {
             if (/^\d+dd$/.test(keys)) {
@@ -61,11 +84,11 @@
         value() {
             if (this.length === 0) return this;
 
-            var parents = document.$(this).parents();
+            let parents = document.$(this).parents();
 
             this.forEach(function(elem) {
                 while (elem && elem.tagName.toUpperCase() !== 'BODY') {
-                    var $elem = document.$(elem);
+                    let $elem = document.$(elem);
                     $elem.css({
                         padding: 0,
                         margin: '0 auto',
