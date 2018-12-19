@@ -96,6 +96,7 @@
                         margin: '0 auto',
                         display: 'block',
                         width: '100%',
+                        maxWidth: '1024px',
                         minWidth: 'auto',
                         position: 'static'
                     });
