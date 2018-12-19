@@ -30,17 +30,18 @@
     };
 
     document.addEventListener('dblclick', function(e) {
-        target = document.$(e.target);
+        if (target) {
+            if (target[0].tagName !== 'BODY') {
+                target = target.parent();
+            }
+        } else {
+            target = document.$(e.target);
+        }
         parents = target.parents().slice(0, -2);
 
-        if (target.hasClass('target-outline')) {
-            target.removeClass('target-outline');
-            restoreClick();
-        } else {
-            document.$('.target-outline').removeClass('target-outline');
-            target.addClass('target-outline');
-            prevendClick();
-        }
+        document.$('.target-outline').removeClass('target-outline');
+        target.addClass('target-outline');
+        prevendClick();
     });
 
     document.addEventListener('keydown', function(e) {
@@ -72,10 +73,11 @@
 
         stack.push(e.which);
         stack.match(/^\d*dd$/, render);
-        stack.match('xx', function () {
+        stack.match('xx', function() {
             window.getSelection().deleteFromDocument();
             if (target) {
                 target.remove();
+                target = null;
             }
         });
     });
@@ -127,4 +129,3 @@
     });
 
 })();
-
