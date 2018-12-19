@@ -96,8 +96,7 @@
                         margin: '0 auto',
                         display: 'block',
                         width: '100%',
-                        minWidth: 'inherit',
-                        maxWidth: '1024px',
+                        minWidth: 'fit-content',
                         position: 'static'
                     });
 
