@@ -6,27 +6,12 @@
 
     const stack = new document.$.Stack(4, 1000);
 
-    let parents = [],
-        prevented = false,
+    let prevented = false,
         target;
 
     let documentClick = function(e) {
         e.preventDefault();
         return false;
-    };
-
-    let prevendClick = function() {
-        if (!prevented) {
-            prevented = !prevented;
-            document.addEventListener('click', documentClick, true);
-        }
-    };
-
-    let restoreClick = function() {
-        if (prevented) {
-            prevented = !prevented;
-            document.removeEventListener('click', documentClick, true);
-        }
     };
 
     let extendTarget = function(e) {
@@ -38,11 +23,9 @@
         } else {
             target = document.$(e.target);
         }
-        parents = target.parents().slice(0, -2);
 
         document.$('.target-outline').removeClass('target-outline');
         target.addClass('target-outline');
-        prevendClick();
     };
 
     let removeTarget = function() {
@@ -57,23 +40,25 @@
 
     document.addEventListener('keydown', function(e) {
         if (e.which === 27) {
-            target = null;
             document.$('.target-outline').removeClass('target-outline');
-            restoreClick();
+            if (prevented) {
+                prevented = !prevented;
+                document.removeEventListener('click', documentClick, true);
+            }
+            target = null;
         }
     });
 
     let render = function() {
         let keys = stack.dump();
-        if (parents.length) {
-            if (/^\d+dd$/.test(keys)) {
-                let times = Number.parseInt(keys, 10) - 1;
-                for (let i = 0; i < times; i++) {
-                    parents.pop();
-                }
+        if (target) {
+            if (!prevented) {
+                prevented = !prevented;
+                document.addEventListener('click', documentClick, true);
             }
-            if (target) target.removeClass('target-outline');
-            NodeList.prototype.readable.apply(document.$(parents.pop() || target));
+            target.removeClass('target-outline');
+            NodeList.prototype.readable.apply(target);
+            target = null;
         } else {
             document.querySelectorAll('article').readable();
         }
@@ -83,7 +68,7 @@
         if (document.$.focused()) return;
 
         stack.push(e.which);
-        stack.match(/^\d*dd$/, render);
+        stack.match('dd', render);
         stack.match('a', extendTarget);
         stack.match('x', removeTarget);
     });
@@ -137,3 +122,4 @@
     });
 
 })();
+
