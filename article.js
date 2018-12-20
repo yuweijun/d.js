@@ -98,6 +98,7 @@
                         width: '100%',
                         maxWidth: '1024px',
                         minWidth: 'auto',
+                        fontSize: 'medium',
                         position: 'static'
                     });
 
