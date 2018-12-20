@@ -29,11 +29,12 @@
         }
     };
 
-    document.addEventListener('dblclick', function(e) {
+    let extendTarget = function(e) {
         if (target) {
-            if (target[0].tagName !== 'BODY') {
-                target = target.parent();
+            if (target[0].tagName === 'BODY') {
+                return;
             }
+            target = target.parent();
         } else {
             target = document.$(e.target);
         }
@@ -42,7 +43,17 @@
         document.$('.target-outline').removeClass('target-outline');
         target.addClass('target-outline');
         prevendClick();
-    });
+    };
+
+    let removeTarget = function() {
+        window.getSelection().deleteFromDocument();
+        if (target) {
+            target.remove();
+            target = null;
+        }
+    };
+
+    document.addEventListener('dblclick', extendTarget);
 
     document.addEventListener('keydown', function(e) {
         if (e.which === 27) {
@@ -73,16 +84,12 @@
 
         stack.push(e.which);
         stack.match(/^\d*dd$/, render);
-        stack.match('xx', function() {
-            window.getSelection().deleteFromDocument();
-            if (target) {
-                target.remove();
-                target = null;
-            }
-        });
+        stack.match('a', extendTarget);
+        stack.match('x', removeTarget);
     });
 
     Object.defineProperty(NodeList.prototype, 'readable', {
+        enumerable: false,
         value() {
             if (this.length === 0) return this;
 
@@ -126,8 +133,7 @@
             document.body.style.height = document.documentElement.scrollHeight + 'px';
 
             return this;
-        },
-        enumerable: false
+        }
     });
 
 })();
