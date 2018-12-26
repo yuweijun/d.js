@@ -15,7 +15,7 @@
     };
 
     let extendTarget = function(e) {
-        if (target) {
+        if (target && target.length) {
             if (target[0].tagName === 'BODY') {
                 return;
             }
@@ -40,6 +40,7 @@
 
     document.addEventListener('keydown', function(e) {
         if (e.which === 27) {
+            document.body.contentEditable = false;
             document.$('.target-outline').removeClass('target-outline');
             if (prevented) {
                 prevented = !prevented;
@@ -64,11 +65,16 @@
         }
     };
 
+    let editBody = function() {
+        document.body.contentEditable = true;
+    };
+
     document.addEventListener('keydown', function(e) {
         if (document.$.focused()) return;
 
         stack.push(e.which);
         stack.match('dd', render);
+        stack.match('ed', editBody);
         stack.match('a', extendTarget);
         stack.match('x', removeTarget);
     });
