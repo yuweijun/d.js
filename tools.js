@@ -15,7 +15,7 @@
     })();
 
     var encode = function(s = '') {
-        return encodeURIComponent(s).toLowerCase();
+        return encodeURIComponent(s);
     };
 
     document.addEventListener('keydown', function(e) {
