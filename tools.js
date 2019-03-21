@@ -42,6 +42,10 @@
             open('http://dict.youdao.com/w/' + encode(s)).focus();
         });
 
+        stack.match('dl', function() {
+            document.$('[data-line-number]').remove();
+        });
+
         stack.match('dt', function() {
             let s = document.$.selection();
             open('http://dict.cn/' + encode(s)).focus();
