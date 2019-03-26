@@ -44,6 +44,16 @@
 
         stack.match('dl', function() {
             document.$('[data-line-number]').remove();
+
+            [].slice.apply(document.querySelectorAll('ol[start]')).forEach(function(e){
+                const fragment = document.createDocumentFragment();
+                const ul = document.createElement('ul');
+                [].slice.apply(e.children).forEach(c => fragment.appendChild(c));
+                ul.style.listStyle = 'none';
+                ul.appendChild(fragment);
+
+                e.parentNode.replaceChild(ul, e);
+            });
         });
 
         stack.match('dt', function() {
