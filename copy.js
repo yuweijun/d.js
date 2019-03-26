@@ -6,7 +6,7 @@
             if (e.which === 67) {
                 var s = document.$.selection();
                 if (s.length) {
-                    s = s.replace(/&nbsp;/g, ' ');
+                    s = s.replace(/\u00A0/g, ' ');
                     console.log("copy", s);
                 }
                 GM_setClipboard(s, {type: 'text', mimetype: 'text/plain'});
