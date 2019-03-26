@@ -14,8 +14,26 @@
         }
     })();
 
-    var encode = function(s = '') {
+    let encode = function(s = '') {
         return encodeURIComponent(s);
+    };
+
+    let removeLineNumber = function() {
+        document.$('[data-line-number]').remove();
+
+        [...document.querySelectorAll('ol[start]')].forEach(function(e){
+            const styles = window.getComputedStyle(e);
+            const fragment = document.createDocumentFragment();
+            const ul = document.createElement('ul');
+
+            [...e.children].forEach(c => fragment.appendChild(c));
+            ul.style.listStyle = 'none';
+            ul.style.border = styles.getPropertyValue('border');
+            ul.style.background = styles.getPropertyValue('background');
+            ul.appendChild(fragment);
+
+            e.parentNode.replaceChild(ul, e);
+        });
     };
 
     document.addEventListener('keydown', function(e) {
@@ -42,24 +60,12 @@
             open('http://dict.youdao.com/w/' + encode(s)).focus();
         });
 
-        stack.match('dl', function() {
-            document.$('[data-line-number]').remove();
-
-            [].slice.apply(document.querySelectorAll('ol[start]')).forEach(function(e){
-                const fragment = document.createDocumentFragment();
-                const ul = document.createElement('ul');
-                [].slice.apply(e.children).forEach(c => fragment.appendChild(c));
-                ul.style.listStyle = 'none';
-                ul.appendChild(fragment);
-
-                e.parentNode.replaceChild(ul, e);
-            });
-        });
-
         stack.match('dt', function() {
             let s = document.$.selection();
             open('http://dict.cn/' + encode(s)).focus();
         });
+
+        stack.match('dl', removeLineNumber);
 
         stack.match('ev', function() {
             open('https://app.yinxiang.com/Home.action').focus();

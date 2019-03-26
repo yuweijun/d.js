@@ -5,7 +5,10 @@
             e.preventDefault();
             if (e.which === 67) {
                 var s = document.$.selection();
-                console.log("copy", s);
+                if (s.length) {
+                    s = s.replace(/&nbsp;/g, ' ');
+                    console.log("copy", s);
+                }
                 GM_setClipboard(s, {type: 'text', mimetype: 'text/plain'});
             } else if (e.which === 82) {
                 // console.log('reload window');
