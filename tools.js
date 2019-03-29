@@ -20,6 +20,7 @@
 
     let removeLineNumber = function() {
         document.$('[data-line-number]').remove();
+        document.$('.gutter > .line').remove();
 
         [...document.querySelectorAll('ol[start]')].forEach(function(e){
             const styles = window.getComputedStyle(e);
