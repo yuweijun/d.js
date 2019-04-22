@@ -24,6 +24,17 @@
                 window.scroll({
                     top: height / 2
                 });
+            } else if (e.which === 74) {
+                // console.log('J');
+                // chrome default scroll 40px using arrow keys
+                window.scrollBy({
+                    top: 1
+                });
+            } else if (e.which === 75) {
+                // console.log('K');
+                window.scrollBy({
+                    top: -1
+                });
             }
         } else if (e.ctrlKey) {
             var page = Math.floor(window.innerHeight / 50) * 50;
@@ -76,4 +87,3 @@
     });
 
 })();
-
