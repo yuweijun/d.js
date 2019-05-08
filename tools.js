@@ -36,6 +36,8 @@
             ul.style.listStyle = 'none';
             ul.style.border = styles.getPropertyValue('border');
             ul.style.borderLeft = '4px solid #903';
+            ul.style.paddingLeft = '15px';
+            ul.style.marginLeft = 0;
             ul.style.background = styles.getPropertyValue('background');
             ul.appendChild(fragment);
 
