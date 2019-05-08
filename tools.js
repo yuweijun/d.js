@@ -9,7 +9,9 @@
             });
             yield;
 
-            document.$("body *").css({outline: ''});
+            document.$("body *").css({
+                outline: ''
+            });
             yield;
         }
     })();
@@ -20,11 +22,12 @@
 
     let removeLineNumber = function() {
         document.$('[data-line-number]').remove();
-
-        document.$('.gutter').attr({'style': "border-right: 4px solid #903 !important"});
+        document.$('.gutter').attr({
+            'style': 'border-right: 4px solid #903 !important'
+        });
         document.$('.gutter .line').remove();
 
-        [...document.querySelectorAll('ol[start]')].forEach(function(e){
+        [...document.querySelectorAll('ol[start], pre ol')].forEach(function(e) {
             const styles = window.getComputedStyle(e);
             const fragment = document.createDocumentFragment();
             const ul = document.createElement('ul');
@@ -32,6 +35,7 @@
             [...e.children].forEach(c => fragment.appendChild(c));
             ul.style.listStyle = 'none';
             ul.style.border = styles.getPropertyValue('border');
+            ul.style.borderLeft = '4px solid #903';
             ul.style.background = styles.getPropertyValue('background');
             ul.appendChild(fragment);
 
@@ -41,7 +45,9 @@
 
     document.addEventListener('keydown', function(e) {
         if (e.which === 27) {
-            document.$('body *').css({outline: ''});
+            document.$('body *').css({
+                outline: ''
+            });
         }
     });
 
@@ -77,4 +83,3 @@
     });
 
 })();
-
