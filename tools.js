@@ -23,7 +23,7 @@
     let removeLineNumber = function() {
         document.$('[data-line-number]').remove();
         document.$('.gutter').attr({
-            'style': 'border-right: 4px solid #903 !important'
+            'style': 'border-left: 4px solid #903 !important'
         });
         document.$('.gutter .line').remove();
 
