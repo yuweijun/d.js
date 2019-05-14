@@ -32,7 +32,10 @@
             const fragment = document.createDocumentFragment();
             const ul = document.createElement('ul');
 
-            [...e.children].forEach(c => fragment.appendChild(c));
+            [...e.children].forEach(function(li) {
+                li.style.listStyle = 'none';
+                fragment.appendChild(li);
+            });
             ul.style.listStyle = 'none';
             ul.style.border = styles.getPropertyValue('border');
             ul.style.borderLeft = '4px solid #903';
