@@ -22,10 +22,14 @@
 
     let removeLineNumber = function() {
         document.$('[data-line-number]').remove();
+
         document.$('.gutter').attr({
             'style': 'border-left: 4px solid #903 !important'
         });
         document.$('.gutter .line').remove();
+
+        document.$('.crayon-main').css({borderLeft: "4px solid #903"});
+        document.$('.crayon-nums-content, .crayon-toolbar').remove();
 
         [...document.querySelectorAll('ol[start], pre ol')].forEach(function(e) {
             const styles = window.getComputedStyle(e);
