@@ -462,6 +462,19 @@
 
             return false;
         }
+
+        static register(keys, fn) {
+            let stack = new Stack;
+
+            document.addEventListener('keydown', function(e) {
+                if (document.$.focused()) return;
+
+                let k = e.which;
+                stack.push(k);
+                stack.match(keys, fn);
+            });
+        }
+
     }
 
     Object.defineProperty(Document.prototype, '$', {

@@ -1,6 +1,6 @@
 (function() {
 
-    var stack = new document.$.Stack;
+    var Stack = document.$.Stack;
 
     var outlined = (function*() {
         while (true) {
@@ -60,35 +60,27 @@
         }
     });
 
-    document.addEventListener('keydown', function(e) {
-        if (document.$.focused()) return;
+    Stack.register('bb', outlined.next.bind(outlined));
 
-        let k = e.which;
-        stack.push(k);
+    Stack.register('tt', function() {
+        let s = document.$.selection();
+        open('https://translate.google.com/#en/zh-CN/' + encode(s)).focus();
+    });
 
-        stack.match('bb', outlined.next.bind(outlined));
+    Stack.register('yt', function() {
+        let s = document.$.selection();
+        open('http://dict.youdao.com/w/' + encode(s)).focus();
+    });
 
-        stack.match('tt', function() {
-            let s = document.$.selection();
-            open('https://translate.google.com/#en/zh-CN/' + encode(s)).focus();
-        });
+    Stack.register('dt', function() {
+        let s = document.$.selection();
+        open('http://dict.cn/' + encode(s)).focus();
+    });
 
-        stack.match('yt', function() {
-            let s = document.$.selection();
-            open('http://dict.youdao.com/w/' + encode(s)).focus();
-        });
+    Stack.register('dl', removeLineNumber);
 
-        stack.match('dt', function() {
-            let s = document.$.selection();
-            open('http://dict.cn/' + encode(s)).focus();
-        });
-
-        stack.match('dl', removeLineNumber);
-
-        stack.match('ev', function() {
-            open('https://app.yinxiang.com/Home.action').focus();
-        });
-
+    Stack.register('ev', function() {
+        open('https://app.yinxiang.com/Home.action').focus();
     });
 
 })();
