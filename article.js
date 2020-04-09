@@ -1,7 +1,7 @@
 (function() {
 
     document.head.insertAdjacentHTML('beforeend', `<style id="tampermonkey-outline-style">
-        .target-outline { outline: 2px solid rgba(8, 8, 4, .4); }
+        .target-outline { outline: 1px dashed rgba(8, 8, 4, .4); }
     </style>`);
 
     const stack = new document.$.Stack(4, 1000);
