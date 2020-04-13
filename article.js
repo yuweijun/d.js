@@ -1,13 +1,13 @@
 (function() {
+    let outline = "1px dashed #" + (~~(Math.random() * (1 << 24))).toString(16);
 
     document.head.insertAdjacentHTML('beforeend', `<style id="tampermonkey-outline-style">
-        .target-outline { outline: 1px dashed rgba(8, 8, 4, .4); }
+        .target-outline { outline: ${outline}; }
     </style>`);
 
     const stack = new document.$.Stack(4, 1000);
 
-    let prevented = false,
-        target;
+    let prevented = false;
 
     let documentClick = function(e) {
         e.preventDefault();
@@ -15,24 +15,24 @@
     };
 
     let extendTarget = function(e) {
-        if (target && target.length) {
-            if (target[0].tagName === 'BODY') {
+        if (window.outlinedTarget && window.outlinedTarget.length) {
+            if (window.outlinedTarget[0].tagName === 'BODY') {
                 return;
             }
-            target = target.parent();
+            window.outlinedTarget = window.outlinedTarget.parent();
         } else {
-            target = document.$(e.target);
+            window.outlinedTarget = document.$(e.target);
         }
 
         document.$('.target-outline').removeClass('target-outline');
-        target.addClass('target-outline');
+        window.outlinedTarget.addClass('target-outline');
     };
 
     let removeTarget = function() {
         window.getSelection().deleteFromDocument();
-        if (target) {
-            target.remove();
-            target = null;
+        if (window.outlinedTarget) {
+            window.outlinedTarget.remove();
+            window.outlinedTarget = null;
         }
     };
 
@@ -46,20 +46,20 @@
                 prevented = !prevented;
                 document.removeEventListener('click', documentClick, true);
             }
-            target = null;
+            window.outlinedTarget = null;
         }
     });
 
     let render = function() {
         let keys = stack.dump();
-        if (target) {
+        if (window.outlinedTarget) {
             if (!prevented) {
                 prevented = !prevented;
                 document.addEventListener('click', documentClick, true);
             }
-            target.removeClass('target-outline');
-            NodeList.prototype.readable.apply(target);
-            target = null;
+            window.outlinedTarget.removeClass('target-outline');
+            NodeList.prototype.readable.apply(window.outlinedTarget);
+            window.outlinedTarget = null;
         } else {
             document.querySelectorAll('article').readable();
         }
@@ -77,54 +77,6 @@
         stack.match('ed', editBody);
         stack.match('a', extendTarget);
         stack.match('x', removeTarget);
-    });
-
-    Object.defineProperty(NodeList.prototype, 'readable', {
-        enumerable: false,
-        value() {
-            if (this.length === 0) return this;
-
-            let parents = document.$(this).parents();
-
-            this.forEach(function(elem) {
-                while (elem && elem.tagName.toUpperCase() !== 'BODY') {
-                    let $elem = document.$(elem);
-                    $elem.css({
-                        padding: 0,
-                        margin: '0 auto',
-                        display: 'block',
-                        width: '100%',
-                        maxWidth: '1024px',
-                        minWidth: 'auto',
-                        fontSize: 'medium',
-                        position: 'static'
-                    });
-
-                    $elem.siblings().filter(function(elem) {
-                        if (elem.tagName.toUpperCase() === 'LINK') {
-                            return false;
-                        }
-                        if (parents.indexOf(elem) > -1) {
-                            return false;
-                        }
-                        return true;
-                    }).remove();
-
-                    elem = elem.parentNode;
-                }
-            });
-
-            document.$(this).css({
-                padding: '15px',
-                boxSizing: 'border-box'
-            });
-
-            document.$('head script').remove();
-            document.$('head').append(document.body.querySelectorAll('link'));
-            document.body.style.height = document.documentElement.scrollHeight + 'px';
-
-            return this;
-        }
     });
 
 })();
