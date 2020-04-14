@@ -8,11 +8,23 @@
 // ==/UserScript==
 
 (function() {
+    let fn = function(e) {
+        e.preventDefault();
+        return false;
+    };
+
+    let prevent = false;
     document.$.Stack.register('cc', function() {
-        document.$('a').click(function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            return false;
-        });
+        if (!prevent) {
+            prevent = true;
+            document.querySelectorAll('a').forEach(function(elem) {
+                elem.addEventListener('click', fn, false);
+            });
+        } else {
+            prevent = false;
+            document.querySelectorAll('a').forEach(function(elem) {
+                elem.removeEventListener('click', fn, false);
+            });
+        }
     });
 })();
