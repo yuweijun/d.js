@@ -51,7 +51,6 @@
     });
 
     let render = function() {
-        let keys = stack.dump();
         if (window.outlinedTarget) {
             if (!prevented) {
                 prevented = !prevented;
