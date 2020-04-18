@@ -496,7 +496,9 @@
                 for (let i = 0; i < frames.length && !s; i++) {
                     try {
                         s = frames[i].document.getSelection().toString();
-                    } catch (err) {}
+                    } catch (err) {
+                        console.log(err);
+                    }
                 }
                 return s.trim();
             };
