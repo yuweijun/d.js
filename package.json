@@ -1,0 +1,27 @@
+{
+  "name": "d",
+  "version": "1.0.0",
+  "description": "simple DOM manipulate library",
+  "main": "d.js",
+  "scripts": {
+    "test": "echo 'Error: no test specified' && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuweijun/d.js.git"
+  },
+  "keywords": [
+    "d.js",
+    "tampermonkey",
+    "javascript"
+  ],
+  "author": "test.yu@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yuweijun/d.js/issues"
+  },
+  "homepage": "https://github.com/yuweijun/d.js#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
