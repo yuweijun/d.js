@@ -79,7 +79,8 @@
         open('http://dict.cn/' + encode(s)).focus();
     });
 
-    Stack.register('gg', function() {
+    // gg has been used by vim action
+    Stack.register('gq', function() {
         let s = document.$.selection();
         if (s) {
             open('https://www.google.com/search?q=' + encode(s)).focus();
