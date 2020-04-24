@@ -80,7 +80,7 @@
     });
 
     // gg has been used by vim action
-    Stack.register('gq', function() {
+    Stack.register('ga', function() {
         let s = document.$.selection();
         if (s) {
             open('https://www.google.com/search?q=' + encode(s)).focus();
