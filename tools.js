@@ -60,6 +60,8 @@
         }
     });
 
+    Stack.register('dl', removeLineNumber);
+
     Stack.register('bb', outlined.next.bind(outlined));
 
     Stack.register('tt', function() {
@@ -77,7 +79,18 @@
         open('http://dict.cn/' + encode(s)).focus();
     });
 
-    Stack.register('dl', removeLineNumber);
+    Stack.register('gg', function() {
+        let s = document.$.selection();
+        if (s) {
+            open('https://www.google.com/search?q=' + encode(s)).focus();
+        } else {
+            open('https://www.google.com/').focus();
+        }
+    });
+
+    Stack.register('gt', function() {
+        open('https://github.com/').focus();
+    });
 
     Stack.register('ev', function() {
         open('https://app.yinxiang.com/Home.action').focus();
