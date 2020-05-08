@@ -38,8 +38,8 @@
             }
         } else if (e.ctrlKey) {
             var page = Math.floor(window.innerHeight / 50) * 50;
-            if (e.which === 68) {
-                // console.log('d');
+            if (e.which === 70) {
+                // console.log('f');
                 // default action is bookmark
                 e.preventDefault();
                 window.scrollBy({
