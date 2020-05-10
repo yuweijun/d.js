@@ -385,7 +385,7 @@
         };
         attr.observe = {
             value(callback = (mutations, mutationObserver) => {}) {
-                const config = Object.assign({ attributes: true, childList: true, subtree: true });
+                const config = Object.assign({ attributes: false, childList: true, subtree: true });
                 const observer = new MutationObserver(callback);
                 this.forEach(function(elem) {
                     observer.observe(elem, config);
