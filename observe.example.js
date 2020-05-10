@@ -22,23 +22,13 @@
         }
     });
 
-    function observe({ targetNode, callback = () => {} }) {
-        if (!targetNode) {
-            return;
-        };
-
-        const config = Object.assign({ attributes: false, childList: true, subtree: true });
-        const observer = new MutationObserver(callback);
-        observer.observe(targetNode, config);
-    };
-
-    observe({
-        targetNode: document.documentElement,
-        callback(mutations, observer) {
+    document.$(document.documentElement).observe(function() {
+            document.$('.Question-sideColumn').remove();
             document.$('.MobileAppHeader-downloadLink, .HotBanner, .HotQuestions-bottomButton').remove();
-            document.$('button.ContentItem-action, .MobileAppHeader-inner').remove();
+            document.$('button.ContentItem-action, .Popover > button, .MobileAppHeader-inner').remove();
             document.$('.ContentItem-expandButton').click();
+            document.$('iframe[src^="https://pos.baidu.com/"]').remove();
         }
-    });
+    );
 
 })();
