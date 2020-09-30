@@ -166,23 +166,23 @@
         });
         ("blur focus click mouseover mouseenter mouseleave " +
             "change select submit keydown keypress keyup").split(" ").forEach(function(event) {
-            attr[event] = {
-                value() {
-                    this.forEach(elem => {
-                        if (arguments.length) {
-                            [...arguments].forEach((fn) => {
-                                elem.addEventListener(event, fn, false);
-                            });
-                        } else {
-                            elem[event]();
-                        }
-                    });
+                attr[event] = {
+                    value() {
+                        this.forEach(elem => {
+                            if (arguments.length) {
+                                [...arguments].forEach((fn) => {
+                                    elem.addEventListener(event, fn, false);
+                                });
+                            } else {
+                                elem[event]();
+                            }
+                        });
 
-                    return this;
-                },
-                enumerable: false
-            };
-        });
+                        return this;
+                    },
+                    enumerable: false
+                };
+            });
         attr.first = {
             value() {
                 var array = Array.prototype.slice.call(this, 0, 1);
@@ -380,6 +380,17 @@
                 } else {
                     return $(selector);
                 }
+            },
+            enumerable: false
+        };
+        attr.observe = {
+            value(callback = (mutations, mutationObserver) => {}) {
+                const config = Object.assign({ attributes: false, childList: true, subtree: true });
+                const observer = new MutationObserver(callback);
+                this.forEach(function(elem) {
+                    observer.observe(elem, config);
+                });
+                return this;
             },
             enumerable: false
         };
