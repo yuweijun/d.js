@@ -66,7 +66,7 @@
 
     Stack.register('tt', function() {
         let s = document.$.selection();
-        open('https://translate.google.com/#en/zh-CN/' + encode(s)).focus();
+        open('https://translate.google.com/?sl=en&tl=zh-CN&op=translate&text=' + encode(s)).focus();
     });
 
     Stack.register('yt', function() {
